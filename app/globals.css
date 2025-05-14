@@ -1,8 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F7F1DB;
+  --foreground: #ededed;
 }
 
 @theme inline {
@@ -14,13 +15,480 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #F7F1DB;
     --foreground: #ededed;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "DotGothic16", sans-serif;
+  background-color: var(--background)
+}
+
+.animated-gradient {
+  background: radial-gradient(
+    circle at 30% 30%, 
+    #ffafd7, 
+    #c6a0f6, 
+    #b5f4e8, 
+    #f9f871
+  );
+  background-size: 400% 400%;
+  animation: morph 15s ease-in-out infinite;
+  filter: blur(8px) saturate(1.3) contrast(1.1);
+}
+
+@keyframes morph {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes jittery {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-3px); }
+  50% { transform: translateY(2px); }
+  75% { transform: translateY(-1px); }
+}
+
+.animate-jittery {
+  animation: jittery 1.5s infinite ease-in-out;
+}
+
+/* Floaty animation for emojis */
+@keyframes floaty {
+  0%, 100% { 
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  25% { 
+    transform: translateY(-20px) translateX(10px) rotate(5deg);
+  }
+  50% { 
+    transform: translateY(10px) translateX(-15px) rotate(-5deg);
+  }
+  75% { 
+    transform: translateY(-10px) translateX(15px) rotate(3deg);
+  }
+}
+
+.animate-floaty {
+  animation: floaty 10s infinite ease-in-out;
+  /* Default values that can be overridden by inline styles */
+  animation-delay: 0s;
+  animation-duration: 10s;
+  opacity: 0.8;
+}
+
+/* Optional: Add some glow to emojis for extra Y2K effect */
+.floating-emoji {
+  filter: drop-shadow(0 0 5px rgba(255, 105, 180, 0.7));
+  will-change: transform; /* Improves animation performance */
+}
+
+.sparkle {
+  background: linear-gradient(to right, #ff00cc, #ffcc00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 2s infinite linear;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+
+/* Sparkle text animation */
+@keyframes text-sparkle {
+  0% { text-shadow: 0 0 8px #ff88cc; }
+  50% { text-shadow: 0 0 15px #ff88cc, 0 0 20px #ff55aa; }
+  100% { text-shadow: 0 0 8px #ff88cc; }
+}
+
+/* Glitter particle animation */
+@keyframes glitter {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0); opacity: 0; }
+}
+
+/* CRT scanline effect */
+@keyframes scanline {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 -20px; }
+}
+
+/* Apply the animations */
+.sparkle-text {
+  animation: text-sparkle 1.5s infinite alternate;
+  position: relative;
+}
+
+.animate-sparkle {
+  animation: text-sparkle 1.5s infinite alternate;
+}
+
+.animate-glitter {
+  animation: glitter 1.5s infinite ease-out;
+}
+
+/* Optional CRT monitor effect */
+.crt-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.crt-effect::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(
+      rgba(18, 16, 16, 0) 50%, 
+      rgba(0, 0, 0, 0.25) 50%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.06),
+      rgba(0, 255, 0, 0.02),
+      rgba(0, 0, 255, 0.06)
+    );
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.crt-effect::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(18, 16, 16, 0.1);
+  opacity: 0;
+  z-index: 10;
+  pointer-events: none;
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.1; }
+  20% { opacity: 0.1; }
+  21% { opacity: 0.3; }
+  60% { opacity: 0.1; }
+  62% { opacity: 0.2; }
+  80% { opacity: 0.1; }
+  100% { opacity: 0.1; }
+}
+
+/* Add a subtle curvature effect */
+.crt-screen {
+  transform: perspective(1000px) rotateX(3deg);
+  transform-origin: center top;
+}
+
+/* Add a subtle vignette effect */
+.crt-effect {
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
+}
+
+/* Add scanline animation */
+@keyframes scanlines {
+  from { background-position: 0 0; }
+  to { background-position: 0 4px; }
+}
+
+.crt-effect::before {
+  animation: scanlines 1s steps(4) infinite;
+}
+/* Y2K Rules Component Styles */
+
+.y2k-rules-container {
+  background: 
+    radial-gradient(circle at center, rgba(255,200,200,0.3) 0%, rgba(255,150,200,0.5) 100%),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="rgba(255,100,255,0.05)" width="50" height="50" x="0" y="0"></rect><rect fill="rgba(100,255,255,0.05)" width="50" height="50" x="50" y="50"></rect></svg>');
+  border: 4px solid #ff00ff;
+  box-shadow: 
+    0 0 15px #ff00ff,
+    0 0 30px rgba(255, 0, 255, 0.3),
+    inset 0 0 15px #ff00ff;
+}
+
+@keyframes text-shine {
+  0% { text-shadow: 0 0 10px #ff00ff; }
+  50% { text-shadow: 0 0 20px #ff00ff, 0 0 30px #ff88ff; }
+  100% { text-shadow: 0 0 10px #ff00ff; }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(15deg); }
+  50% { transform: rotate(-10deg); }
+  75% { transform: rotate(5deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-reverse {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+.animate-text-shine {
+  animation: text-shine 2s infinite alternate;
+}
+
+.animate-wiggle {
+  animation: wiggle 1s infinite;
+}
+
+.animate-float {
+  animation: float ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 10s linear infinite;
+}
+
+.animate-spin-reverse {
+  animation: spin-reverse 8s linear infinite;
+}
+
+.y2k-rule-card {
+  backdrop-filter: blur(5px);
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><circle cx='8' cy='8' r='8' fill='%23ff00ff'/></svg>"), auto;
+}
+
+.y2k-rule-card:hover {
+  box-shadow: 
+    0 0 10px #ff00ff,
+    inset 0 0 5px #ffffff;
+}
+
+/* CRT effect remains the same as previous component */
+
+/* Vertical text container */
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  position: relative;
+  padding: 2rem;
+  border-left: 3px dashed #ff00ff;
+}
+
+/* Layered text effect */
+.text-layer {
+  font-family: 'Impact', 'Arial Black', sans-serif;
+  font-size: 4.5rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 0.8;
+  text-shadow:
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 20px rgba(255,255,255,0.5),
+    3px 3px 0 #000,
+    -3px -3px 0 #000;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+  padding: 0.5rem;
+  background: 
+    linear-gradient(90deg, 
+      rgba(255,255,255,0.1) 0%, 
+      rgba(255,255,255,0) 50%,
+      rgba(255,255,255,0.1) 100%);
+}
+
+/* Glitch effect */
+.glitched {
+  position: relative;
+}
+.glitched::before,
+.glitched::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+}
+.glitched::before {
+  left: 2px;
+  text-shadow: -2px 0 magenta;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+.glitched::after {
+  left: -2px;
+  text-shadow: -2px 0 cyan;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(31px, 9999px, 94px, 0); }
+  10% { clip: rect(112px, 9999px, 76px, 0); }
+  20% { clip: rect(85px, 9999px, 77px, 0); }
+  30% { clip: rect(27px, 9999px, 97px, 0); }
+  40% { clip: rect(64px, 9999px, 98px, 0); }
+  50% { clip: rect(61px, 9999px, 85px, 0); }
+  60% { clip: rect(99px, 9999px, 114px, 0); }
+  70% { clip: rect(34px, 9999px, 115px, 0); }
+  80% { clip: rect(98px, 9999px, 129px, 0); }
+  90% { clip: rect(43px, 9999px, 96px, 0); }
+  100% { clip: rect(82px, 9999px, 64px, 0); }
+}
+
+/* Spinning emoji animation */
+@keyframes spin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.5); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+.animate-spin {
+  animation: spin linear infinite;
+  opacity: 0.7;
+}
+
+/* Border animation */
+.vertical-text::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    #ff00ff, #00ffff, #ffff00, #ff00ff);
+  background-size: 200% 100%;
+  animation: border-anim 3s linear infinite;
+}
+
+@keyframes border-anim {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.samaan-rules-game {
+  background: 
+    radial-gradient(circle at center, rgba(255,100,255,0.2) 0%, rgba(0,200,255,0.2) 100%),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="rgba(255,100,255,0.05)" width="50" height="50" x="0" y="0"></rect><rect fill="rgba(100,255,255,0.05)" width="50" height="50" x="50" y="50"></rect></svg>');
+}
+
+@keyframes float {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-50px) rotate(10deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+.animate-float {
+  animation: float ease-in-out infinite;
+  will-change: transform;
+  user-select: none;
+}
+
+/* Vertical Text Layout */
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 2rem;
+  height: 80vh;
+  justify-content: center;
+}
+
+.text-layer {
+  font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-shadow: 
+    0 0 5px currentColor,
+    0 0 15px currentColor,
+    0 0 5px rgba(255,255,255,0.8);
+  padding: 0.5rem;
+  background: rgba(0,0,0,0.3);
+  border-radius: 0.5rem;
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0) rotate(0deg) scale(1); 
+  }
+  50% { 
+    transform: translateY(-50px) rotate(5deg) scale(1.1); 
+  }
+}
+
+.animate-float {
+  animation: float ease-in-out infinite;
+  will-change: transform;
+  user-select: none;
+}
+
+/* Ensure Rules component doesn't get squished */
+@media (max-width: 768px) {
+  .vertical-text {
+    gap: 1rem;
+    font-size: 2.5rem;
+  }
+  .pl-24 {
+    padding-left: 6rem;
+  }
+}
+
+/* Add to your existing styles */
+.neon-text {
+  text-shadow: 0 0 5px #ff0, 0 0 10px #ff0, 0 0 20px #ff0;
+  animation: neon-flicker 1.5s infinite alternate;
+}
+
+@keyframes neon-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow: 
+      0 0 5px #ff0,
+      0 0 10px #ff0,
+      0 0 20px #ff0,
+      0 0 40px #f0f;
+  }
+  20%, 24%, 55% {        
+    text-shadow: none;
+  }
+}
+
+.animate-spin-slow {
+  animation: spin 10s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
